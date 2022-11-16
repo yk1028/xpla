@@ -6,6 +6,8 @@ import (
 	"os"
 	"path/filepath"
 
+	"github.com/xpladev/xpla/cmd/xplad/cmd/worker"
+
 	"github.com/cosmos/cosmos-sdk/baseapp"
 	"github.com/cosmos/cosmos-sdk/client"
 	"github.com/cosmos/cosmos-sdk/client/config"
@@ -34,9 +36,11 @@ import (
 	ethermintclient "github.com/evmos/ethermint/client"
 	"github.com/evmos/ethermint/crypto/hd"
 
+	"github.com/evmos/ethermint/client/debug"
 	xpla "github.com/xpladev/xpla/app"
 	"github.com/xpladev/xpla/app/params"
-	"github.com/evmos/ethermint/client/debug"
+
+	ipfsrewardcli "github.com/xpladev/xpla/x/ipfs-reward/client/cli"
 )
 
 // NewRootCmd creates a new root command for simd. It is called once in the
@@ -122,6 +126,8 @@ func initRootCmd(rootCmd *cobra.Command, encodingConfig params.EncodingConfig) {
 		encCfg: encodingConfig,
 	}
 	server.AddCommands(rootCmd, xpla.DefaultNodeHome, ac.newApp, ac.appExport, addModuleInitFlags)
+
+	ipfsrewardcli.InitializeWorker(worker.HandleBlock, worker.HandleTx)
 
 	// add keybase, auxiliary RPC, query, and tx child commands
 	rootCmd.AddCommand(
