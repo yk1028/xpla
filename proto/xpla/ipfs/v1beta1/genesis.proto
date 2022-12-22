@@ -1,0 +1,11 @@
+syntax = "proto3";
+package xpla.ipfs.v1beta1;
+
+option go_package = "github.com/xpladev/xpla/x/ipfs/types";
+
+import "gogoproto/gogo.proto";
+import "xpla/ipfs/v1beta1/ipfs.proto";
+
+message GenesisState {
+    Params params = 1 [(gogoproto.nullable) = false, (gogoproto.moretags) = "yaml:\"params\""];
+}

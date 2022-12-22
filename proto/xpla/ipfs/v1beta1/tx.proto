@@ -1,0 +1,17 @@
+syntax = "proto3";
+package xpla.ipfs.v1beta1;
+
+option go_package = "github.com/xpladev/xpla/x/ipfs/types";
+
+import "gogoproto/gogo.proto";
+
+service Msg {
+    rpc GetIpfsStorageSize(MsgGetIpfsStorage) returns (MsgIpfsStorageResponse);
+}
+
+message MsgGetIpfsStorage { }
+
+message MsgIpfsStorageResponse {
+    string name = 1;
+    uint64 size = 2;
+}

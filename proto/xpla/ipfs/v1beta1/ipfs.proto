@@ -1,0 +1,12 @@
+syntax = "proto3";
+package xpla.ipfs.v1beta1;
+
+option go_package = "github.com/xpladev/xpla/x/ipfs/types";
+
+import "gogoproto/gogo.proto";
+
+message Params {
+    option (gogoproto.goproto_stringer) = false;
+
+    string address = 1; //ipfs node address
+}

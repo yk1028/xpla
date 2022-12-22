@@ -1,0 +1,20 @@
+syntax = "proto3";
+package xpla.ipfs.v1beta1;
+
+import "gogoproto/gogo.proto";
+import "google/api/annotations.proto";
+import "xpla/ipfs/v1beta1/ipfs.proto";
+
+option go_package = "github.com/xpladev/xpla/x/ipfs/types";
+
+service Query {
+    rpc Params(QueryParamsRequest) returns (QueryParamsResponse) {
+        option (google.api.http).get = "/xpla/ipfs/v1beta1/params";
+    }
+}
+
+message QueryParamsRequest {}
+
+message QueryParamsResponse {
+    Params params = 1 [(gogoproto.nullable) = false];
+}
